@@ -2,6 +2,7 @@ extends Node
 
 @export var player : PackedScene
 @export var map : PackedScene
+@export var test_map : PackedScene
 
 # Server
 func _on_host_button_pressed():
@@ -23,13 +24,19 @@ func _on_join_button_pressed():
 
 	multiplayer.connected_to_server.connect(load_game) # Loads only if connected to a server
 	multiplayer.server_disconnected.connect(server_offline)
+	
+func _on_solo_button_pressed():
+	# Load the test level
+	%Menu.hide()
+	%MapInstance.add_child(test_map.instantiate())
+	add_player.rpc(multiplayer.get_unique_id())
 
 func load_game():
 	%Menu.hide()
 	%MapInstance.add_child(map.instantiate())
 	add_player.rpc(multiplayer.get_unique_id())
 
-@rpc("any_peer") # Add "call_local" if you also want to spawn a player from the server
+@rpc("call_local") # Add "call_local" if you also want to spawn a player from the server
 func add_player(id):
 	var player_instance = player.instantiate()
 	player_instance.name = str(id)

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://clvp4cain5340"]
+[gd_scene format=3 uid="uid://clkvyt8p05qkf"]
 
-[node name="Map" type="Control"]
+[node name="Test_Map" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,8 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 4092.0
+offset_bottom = 2302.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.788235, 0.760784, 0.678431, 1)
+color = Color(0.807843, 0.976471, 0.984314, 1)
