@@ -1,42 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs7kdpemhirwt"]
+[gd_scene load_steps=3 format=3 uid="uid://cs7kdpemhirwt"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_qmj53"]
-[ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://player/player.tscn" id="2_mm035"]
-[ext_resource type="PackedScene" uid="uid://clvp4cain5340" path="res://maps/lobby.tscn" id="3_y0mr2"]
-[ext_resource type="PackedScene" uid="uid://clkvyt8p05qkf" path="res://maps/test_map.tscn" id="4_7psno"]
+[ext_resource type="Script" path="res://Main.gd" id="1_qmj53"]
+[ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://player/player.tscn" id="2_rnqeu"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_qmj53")
-player = ExtResource("2_mm035")
-map = ExtResource("3_y0mr2")
-test_map = ExtResource("4_7psno")
+Player = ExtResource("2_rnqeu")
 
-[node name="MapInstance" type="Node" parent="."]
+[node name="MapInstance" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="SpawnPosition" type="Node2D" parent="."]
+[node name="PlayerSpawn" type="Node" parent="."]
 unique_name_in_owner = true
-y_sort_enabled = true
-position = Vector2(200, 150)
 
-[node name="Menu" type="PanelContainer" parent="."]
+[node name="Menu" type="Control" parent="."]
 unique_name_in_owner = true
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -675.0
-offset_top = -340.5
-offset_right = 675.0
-offset_bottom = 340.5
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
-layout_mode = 2
+layout_mode = 0
+offset_left = 285.0
+offset_top = 199.5
+offset_right = 1635.0
+offset_bottom = 880.5
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 50
@@ -90,7 +79,7 @@ layout_mode = 2
 text = "
 "
 
-[node name="To" type="LineEdit" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="IPAddress" type="LineEdit" parent="Menu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -106,23 +95,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Join"
 
-[node name="DisplayPublicIP" type="Label" parent="."]
+[node name="DisplayPublicIP" type="Label" parent="Menu"]
 unique_name_in_owner = true
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -79.0
-offset_right = 79.0
-offset_bottom = 26.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
-horizontal_alignment = 1
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player/player.tscn")
-spawn_path = NodePath("../SpawnPosition")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/SoloButton" to="." method="_on_solo_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="text_submitted" from="Menu/MarginContainer/VBoxContainer/To" to="." method="_on_to_text_submitted"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

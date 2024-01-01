@@ -6,6 +6,7 @@ func _ready():
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
+	
 	var speed_multiplier = Vector2(500,300)
 	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * speed_multiplier
 	move_and_slide()
