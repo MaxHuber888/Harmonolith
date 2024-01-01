@@ -10,7 +10,7 @@ Player = ExtResource("2_rnqeu")
 [node name="MapInstance" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="PlayerSpawn" type="Node" parent="."]
+[node name="PlayerSpawn" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="Menu" type="Control" parent="."]
@@ -69,10 +69,15 @@ layout_mode = 2
 text = "
 "
 
-[node name="HostButton" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="OnlineHost" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Host"
+text = "Online"
+
+[node name="LocalHost" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Local"
 
 [node name="Label3" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -102,5 +107,6 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/SoloButton" to="." method="_on_solo_button_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/OnlineHost" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/LocalHost" to="." method="_on_local_host_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
