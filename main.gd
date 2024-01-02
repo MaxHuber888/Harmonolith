@@ -7,12 +7,12 @@ signal player_disconnected(id)
 
 const PORT = 9999
 const MAX_CLIENTS = 4
-
 var address = "127.0.0.1"
 
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
 var players = {}
+const RAND_SPAWN = 2.0
 
 # This is the local player info. This should be modified locally
 # before the connection is made. It will be passed to every other peer.
@@ -138,13 +138,16 @@ func register_player(new_player_info):
 @rpc("call_local", "reliable")
 func add_player(id):
 	var player_instance = Player.instantiate()
+	var pos := Vector2.from_angle(randf()*2*PI)
+	player_instance.position = Vector2(pos.x * RAND_SPAWN * randf(), pos.y * RAND_SPAWN * randf())
 	player_instance.name = str(id)
 	%PlayerSpawn.add_child(player_instance)
 
 @rpc("any_peer", "call_local", "reliable")
 func remove_player(id):
-	if %PlayerSpawn.get_node(str(id)):
-		%PlayerSpawn.get_node(str(id)).queue_free()
+	if not %PlayerSpawn.has_node(str(id)):
+		return
+	%PlayerSpawn.get_node(str(id)).queue_free()
 
 # Settings Menu
 func _input(event: InputEvent):

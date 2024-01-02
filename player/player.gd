@@ -16,7 +16,7 @@ func _ready():
 	set_multiplayer_authority(name.to_int())
 	$DisplayAuthority.visible = is_multiplayer_authority()
 	
-	$Item/CollisionShape2D.disabled = true
+	$Item/WeaponCollider.disabled = true
 	
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -43,7 +43,10 @@ func move():
 	if input_movement == Vector2.ZERO:
 		anim_state.travel("Idle")
 		velocity = Vector2.ZERO
-		
+	
+	if Input.is_action_just_pressed("attack"):
+		current_states = player_states.ATTACK
+	
 	if Input.is_action_just_pressed("dodge"):
 		current_states = player_states.DODGE
 	
@@ -51,7 +54,7 @@ func move():
 
 # attacking
 func attack():
-	pass
+	anim_state.travel("Attack")
 
 # dodge roll
 func dodge():
@@ -63,11 +66,11 @@ func _on_state_reset():
 	current_states = player_states.MOVE
 
 # handle mouse peek for camera movement
-func _input(event: InputEvent):
-	if event is InputEventMouseMotion:
-		var target = event.position - get_viewport().size * cam_mouse_influence
-		if target.length() < cam_deadzone:
-			camera.position = Vector2(0,0)
-		else:
-			camera.position = target.normalized() * (target.length() - cam_deadzone) * cam_mouse_influence
+#func _input(event: InputEvent):
+	#if event is InputEventMouseMotion:
+		#var target = event.position - get_viewport().size * cam_mouse_influence
+		#if target.length() < cam_deadzone:
+			#camera.position = Vector2(0,0)
+		#else:
+			#camera.position = target.normalized() * (target.length() - cam_deadzone) * cam_mouse_influence
 	
