@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs7kdpemhirwt"]
+[gd_scene load_steps=3 format=3 uid="uid://cs7kdpemhirwt"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_qmj53"]
 [ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://player/player.tscn" id="2_rnqeu"]
-[ext_resource type="Script" path="res://Settings.gd" id="3_2l8oy"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_qmj53")
@@ -13,7 +12,6 @@ unique_name_in_owner = true
 
 [node name="PlayerSpawn" type="Node2D" parent="."]
 unique_name_in_owner = true
-metadata/_edit_lock_ = true
 
 [node name="Menu" type="Control" parent="."]
 unique_name_in_owner = true
@@ -104,13 +102,11 @@ text = "Join"
 
 [node name="Settings" type="Control" parent="."]
 unique_name_in_owner = true
-process_mode = 2
 visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("3_2l8oy")
 
 [node name="MarginContainer" type="MarginContainer" parent="Settings"]
 layout_mode = 0
@@ -155,29 +151,7 @@ theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "Settings"
 
-[node name="Label5" type="Label" parent="Settings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "
-"
-
-[node name="ResumeButton" type="Button" parent="Settings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 30
-text = "Resume Game"
-
 [node name="Label3" type="Label" parent="Settings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "
-"
-
-[node name="QuitButton" type="Button" parent="Settings/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 30
-text = "Quit to Main Menu"
-
-[node name="Label6" type="Label" parent="Settings/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
@@ -186,14 +160,11 @@ text = "
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
-text = "Exit Game"
+text = "Exit to Main Menu"
 
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/SoloButton" to="." method="_on_solo_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/OnlineHost" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/LocalHost" to="." method="_on_local_host_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="exit" from="Settings" to="." method="_on_settings_exit"]
-[connection signal="pressed" from="Settings/MarginContainer/VBoxContainer/SettingsButton" to="Settings" method="_on_settings_button_pressed"]
-[connection signal="pressed" from="Settings/MarginContainer/VBoxContainer/ResumeButton" to="Settings" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="Settings/MarginContainer/VBoxContainer/QuitButton" to="Settings" method="_on_quit_button_pressed"]
-[connection signal="pressed" from="Settings/MarginContainer/VBoxContainer/ExitButton" to="Settings" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Settings/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Settings/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

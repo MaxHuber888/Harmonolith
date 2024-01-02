@@ -3,14 +3,12 @@ extends Node
 @export var Player : PackedScene
 
 # These signals can be connected to by a UI lobby scene or the game scene.
-signal player_connected(id, player_info)
 signal player_disconnected(id)
-signal server_disconnected
 
 const PORT = 9999
 const MAX_CLIENTS = 4
 
-var default_address = "127.0.0.1"
+var address = "127.0.0.1"
 
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
@@ -30,6 +28,8 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	
+	player_disconnected.connect(_on_peer_disconnected)
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.
@@ -45,14 +45,12 @@ func _on_peer_disconnected(id):
 	print("Player disconnected: " + str(id))
 	remove_player.rpc(id)
 	players.erase(id)
-	player_disconnected.emit(id)
 
 # Called on client only
 func _on_connected_to_server():
 	print("Connected to server.")
 	var peer_id = multiplayer.get_unique_id()
 	players[peer_id] = player_info
-	player_connected.emit(peer_id, player_info)
 
 # Called on client only
 func _on_connection_failed():
@@ -63,7 +61,7 @@ func _on_server_disconnected():
 	print("Server disconnected!")
 	multiplayer.multiplayer_peer = null
 	for i in players:
-		remove_player(i)
+		remove_player.rpc(i)
 	if %MapInstance.get_child(0):
 		%MapInstance.get_child(0).queue_free()
 	%Menu.show()
@@ -82,18 +80,17 @@ func create_game(is_online):
 	multiplayer.multiplayer_peer = peer
 	
 	players[1] = player_info
-	player_connected.emit(1, player_info)
 
 #  Client - Call this in the `ready()` function and set the public IP address of your server for automatic joining
-func join_game(address):
-	if address == "":
-		address = default_address
+func join_game(address_to_join):
+	if address_to_join == "":
+		address_to_join = address
 	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(address, PORT)
+	var error = peer.create_client(address_to_join, PORT)
 	if error:
 		print("Couldn't create client!")
 		return error
-	print("Joining Server IP: " + address)
+	print("Joining Server IP: " + address_to_join)
 	multiplayer.multiplayer_peer = peer
 
 # Set up port mapping for online multiplayer functionality
@@ -101,9 +98,8 @@ func upnp_setup():
 	var upnp = UPNP.new()
 	upnp.discover()
 	upnp.add_port_mapping(PORT)
-	var ip_address = upnp.query_external_address()
-	print("Server IP: " + ip_address)
-	%DisplayPublicIP.text = "Server IP: " + ip_address
+	address = upnp.query_external_address()
+	print("Server IP: " + address)
 
 # Game Methods
 func _on_solo_button_pressed():
@@ -138,7 +134,6 @@ func load_game(map_scene_path):
 func register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
-	player_connected.emit(new_player_id, new_player_info)
 	
 @rpc("call_local", "reliable")
 func add_player(id):
@@ -150,3 +145,13 @@ func add_player(id):
 func remove_player(id):
 	if %PlayerSpawn.get_node(str(id)):
 		%PlayerSpawn.get_node(str(id)).queue_free()
+
+# Settings Menu
+func _input(event: InputEvent):
+	if event.is_action_pressed("ui_cancel"):
+		var current_pause : bool = get_tree().paused
+		%Settings.visible = !current_pause
+		get_tree().paused = !current_pause
+
+func _on_settings_exit(id):
+	player_disconnected.emit(id)
