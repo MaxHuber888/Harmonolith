@@ -62,6 +62,11 @@ func _on_connection_failed():
 func _on_server_disconnected():
 	print("Server disconnected!")
 	multiplayer.multiplayer_peer = null
+	for i in players:
+		remove_player(i)
+	if %MapInstance.get_child(0):
+		%MapInstance.get_child(0).queue_free()
+	%Menu.show()
 
 # Server
 func create_game(is_online):
