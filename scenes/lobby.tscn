@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://clvp4cain5340"]
 
 [ext_resource type="TileSet" uid="uid://c8mkwj0lrggbp" path="res://scenes/tiles/test_tiles.tres" id="1_barfm"]
-[ext_resource type="PackedScene" uid="uid://chin34cg06evi" path="res://Entities/door/NextLevelDoor.tscn" id="2_k50i3"]
+[ext_resource type="PackedScene" uid="uid://chin34cg06evi" path="res://objects/door/NextLevelDoor.tscn" id="2_k50i3"]
 
 [node name="Lobby" type="Node2D" groups=["Level"]]
 metadata/_edit_lock_ = true

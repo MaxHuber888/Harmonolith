@@ -1,12 +1,14 @@
 extends Node
 
 @export var Player : PackedScene
+@export var Lobby : PackedScene
+@export var TestMap : PackedScene
 
 const PORT = 9999
 const MAX_CLIENTS = 4
 var address = "127.0.0.1"
 
-const RAND_SPAWN = 2.0
+const RAND_SPAWN = 250
 
 # This is the local player info. This should be modified locally
 # before the connection is made. It will be passed to every other peer.
@@ -28,7 +30,7 @@ func _ready():
 # Called on server and client
 func _on_peer_connected(id):
 	print("Player connected: " + str(id))
-	load_game.rpc("res://maps/lobby.tscn")
+	load_game.rpc("res://scenes/lobby.tscn")
 	add_player.rpc(id)
 
 # Called on server and client
@@ -94,20 +96,22 @@ func upnp_setup():
 
 # Game loading
 @rpc("call_local", "reliable")
-func load_game(map_scene_path):
+func load_game(scene):
 	%MainMenu.hide()
 	if %MapInstance.get_child(0):
 		%MapInstance.get_child(0).queue_free()
-	var map = load(map_scene_path).instantiate()
+	var map = load(scene).instantiate()
 	%MapInstance.add_child(map)
 	
 @rpc("call_local", "reliable")
 func add_player(id):
 	var player_instance = Player.instantiate()
-	var pos := Vector2.from_angle(randf()*2*PI)
-	player_instance.position = Vector2(pos.x * RAND_SPAWN * randf(), pos.y * RAND_SPAWN * randf())
 	player_instance.name = str(id)
 	%PlayerSpawn.add_child(player_instance)
+	
+	var pos := Vector2.from_angle(randf()*2*PI)
+	player_instance.position = Vector2(pos.x * RAND_SPAWN * randf(), pos.y * RAND_SPAWN * randf())
+
 
 @rpc("any_peer", "call_local", "reliable")
 func remove_player(id):
@@ -118,17 +122,17 @@ func remove_player(id):
 
 # Game Methods
 func _on_solo_button_pressed():
-	load_game.rpc("res://maps/test_map.tscn")
+	load_game.rpc("res://scenes/test_map.tscn")
 	add_player.rpc(multiplayer.get_unique_id())
 
 func _on_host_button_pressed():
 	create_game(true)
-	load_game.rpc("res://maps/lobby.tscn")
+	load_game.rpc(Lobby)
 	add_player.rpc(multiplayer.get_unique_id())
 
 func _on_local_host_pressed():
 	create_game(false)
-	load_game.rpc("res://maps/lobby.tscn")
+	load_game.rpc(Lobby)
 	add_player.rpc(multiplayer.get_unique_id())
 
 func _on_join_button_pressed():
