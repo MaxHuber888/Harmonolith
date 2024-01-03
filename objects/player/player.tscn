@@ -1,7 +1,7 @@
 [gd_scene load_steps=57 format=3 uid="uid://dsm0u4o7lg7sr"]
 
 [ext_resource type="Script" path="res://player/Player.gd" id="1_u4j5f"]
-[ext_resource type="Texture2D" uid="uid://c822ydi5mgbdm" path="res://sprites/PlayStation - SaGa Frontier 2 - Adventurer.png" id="2_sdfbj"]
+[ext_resource type="Texture2D" uid="uid://c822ydi5mgbdm" path="res://objects/sprites/PlayStation - SaGa Frontier 2 - Adventurer.png" id="2_sdfbj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l71wl"]
 radius = 12.0

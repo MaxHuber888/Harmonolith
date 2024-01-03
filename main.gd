@@ -2,16 +2,10 @@ extends Node
 
 @export var Player : PackedScene
 
-# These signals can be connected to by a UI lobby scene or the game scene.
-signal player_disconnected(id)
-
 const PORT = 9999
 const MAX_CLIENTS = 4
 var address = "127.0.0.1"
 
-# This will contain player info for every player,
-# with the keys being each player's unique IDs.
-var players = {}
 const RAND_SPAWN = 2.0
 
 # This is the local player info. This should be modified locally
@@ -28,15 +22,12 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	
-	player_disconnected.connect(_on_peer_disconnected)
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.
 # Called on server and client
 func _on_peer_connected(id):
 	print("Player connected: " + str(id))
-	register_player.rpc_id(id, player_info)
 	load_game.rpc("res://maps/lobby.tscn")
 	add_player.rpc(id)
 
@@ -44,13 +35,15 @@ func _on_peer_connected(id):
 func _on_peer_disconnected(id):
 	print("Player disconnected: " + str(id))
 	remove_player.rpc(id)
-	players.erase(id)
-
+	
+	# If host disconnects, disconnect server
+	if id == 1:
+		multiplayer.server_disconnected.emit()
+	
 # Called on client only
 func _on_connected_to_server():
 	print("Connected to server.")
 	var peer_id = multiplayer.get_unique_id()
-	players[peer_id] = player_info
 
 # Called on client only
 func _on_connection_failed():
@@ -59,12 +52,11 @@ func _on_connection_failed():
 
 func _on_server_disconnected():
 	print("Server disconnected!")
-	multiplayer.multiplayer_peer = null
-	for i in players:
-		remove_player.rpc(i)
-	if %MapInstance.get_child(0):
-		%MapInstance.get_child(0).queue_free()
-	%Menu.show()
+	for p in %PlayerSpawn.get_children():
+		remove_player.rpc(p.name)
+	for m in %MapInstance.get_children():
+		m.queue_free()
+	multiplayer.multiplayer_peer.close()
 
 # Server
 func create_game(is_online):
@@ -78,10 +70,8 @@ func create_game(is_online):
 		return error
 	
 	multiplayer.multiplayer_peer = peer
-	
-	players[1] = player_info
 
-#  Client - Call this in the `ready()` function and set the public IP address of your server for automatic joining
+# Client - Call this in the `ready()` function and set the public IP address of your server for automatic joining
 func join_game(address_to_join):
 	if address_to_join == "":
 		address_to_join = address
@@ -101,6 +91,31 @@ func upnp_setup():
 	address = upnp.query_external_address()
 	print("Server IP: " + address)
 
+
+# Game loading
+@rpc("call_local", "reliable")
+func load_game(map_scene_path):
+	%MainMenu.hide()
+	if %MapInstance.get_child(0):
+		%MapInstance.get_child(0).queue_free()
+	var map = load(map_scene_path).instantiate()
+	%MapInstance.add_child(map)
+	
+@rpc("call_local", "reliable")
+func add_player(id):
+	var player_instance = Player.instantiate()
+	var pos := Vector2.from_angle(randf()*2*PI)
+	player_instance.position = Vector2(pos.x * RAND_SPAWN * randf(), pos.y * RAND_SPAWN * randf())
+	player_instance.name = str(id)
+	%PlayerSpawn.add_child(player_instance)
+
+@rpc("any_peer", "call_local", "reliable")
+func remove_player(id):
+	if not %PlayerSpawn.has_node(str(id)):
+		return
+	%PlayerSpawn.get_node(str(id)).queue_free()
+
+
 # Game Methods
 func _on_solo_button_pressed():
 	load_game.rpc("res://maps/test_map.tscn")
@@ -119,42 +134,5 @@ func _on_local_host_pressed():
 func _on_join_button_pressed():
 	join_game(%IPAddress.text)
 
-# Game loading
-# When the server decides to start the game from a UI scene,
-# do Lobby.load_game.rpc(filepath)
-@rpc("call_local", "reliable")
-func load_game(map_scene_path):
-	%Menu.hide()
-	if %MapInstance.get_child(0):
-		%MapInstance.get_child(0).queue_free()
-	var map = load(map_scene_path).instantiate()
-	%MapInstance.add_child(map)
-
-@rpc("any_peer", "reliable")
-func register_player(new_player_info):
-	var new_player_id = multiplayer.get_remote_sender_id()
-	players[new_player_id] = new_player_info
-	
-@rpc("call_local", "reliable")
-func add_player(id):
-	var player_instance = Player.instantiate()
-	var pos := Vector2.from_angle(randf()*2*PI)
-	player_instance.position = Vector2(pos.x * RAND_SPAWN * randf(), pos.y * RAND_SPAWN * randf())
-	player_instance.name = str(id)
-	%PlayerSpawn.add_child(player_instance)
-
-@rpc("any_peer", "call_local", "reliable")
-func remove_player(id):
-	if not %PlayerSpawn.has_node(str(id)):
-		return
-	%PlayerSpawn.get_node(str(id)).queue_free()
-
-# Settings Menu
-func _input(event: InputEvent):
-	if event.is_action_pressed("ui_cancel"):
-		var current_pause : bool = get_tree().paused
-		%Settings.visible = !current_pause
-		get_tree().paused = !current_pause
-
-func _on_settings_exit(id):
-	player_disconnected.emit(id)
+func _on_settings_button_pressed():
+	print("Settings")

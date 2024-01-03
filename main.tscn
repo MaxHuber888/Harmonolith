@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cs7kdpemhirwt"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_qmj53"]
-[ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://player/player.tscn" id="2_rnqeu"]
+[ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://objects/player/player.tscn" id="2_rnqeu"]
 [ext_resource type="Script" path="res://Settings.gd" id="3_2l8oy"]
 
 [node name="Main" type="Node"]
@@ -15,15 +15,17 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 2
 
-[node name="Menu" type="Control" parent="CanvasLayer"]
+[node name="MainMenu" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
 layout_mode = 0
 offset_left = 285.0
 offset_top = 199.5
@@ -34,85 +36,105 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Single Player:
 "
 horizontal_alignment = 1
 
-[node name="Label5" type="Label" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="Label5" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="SoloButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="SoloButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "Start Game"
 
-[node name="Label4" type="Label" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="Label2" type="Label" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Multiplayer:"
 horizontal_alignment = 1
 
-[node name="Label6" type="Label" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="Label6" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="OnlineHost" type="Button" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="OnlineHost" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Online"
 
-[node name="LocalHost" type="Button" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="LocalHost" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Local"
 
-[node name="Label3" type="Label" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="IPAddress" type="LineEdit" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="IPAddress" type="LineEdit" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "Enter server IP"
 
-[node name="Label7" type="Label" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="Label7" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="JoinButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/VBoxContainer"]
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Join"
 
-[node name="Settings" type="Control" parent="CanvasLayer"]
+[node name="Label8" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+"
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+
+[node name="Label9" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "
+"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Exit Game"
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
-process_mode = 2
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("3_2l8oy")
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PauseMenu"]
 layout_mode = 0
 offset_left = 285.0
 offset_top = 199.5
@@ -123,77 +145,79 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseMenu/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="Label1" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="Label1" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Server IP Address:"
 horizontal_alignment = 1
 
-[node name="DisplayIPAddress" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="DisplayIPAddress" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "127.0.0.1"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="Label4" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="SettingsButton" type="Button" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "Settings"
 
-[node name="Label5" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="Label5" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="ResumeButton" type="Button" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "Resume Game"
 
-[node name="Label3" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "Quit to Main Menu"
 
-[node name="Label6" type="Label" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="Label6" type="Label" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "
 "
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/Settings/MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "Exit Game"
 
-[connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/SoloButton" to="." method="_on_solo_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/OnlineHost" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/LocalHost" to="." method="_on_local_host_pressed"]
-[connection signal="pressed" from="CanvasLayer/Menu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="exit" from="CanvasLayer/Settings" to="." method="_on_settings_exit"]
-[connection signal="pressed" from="CanvasLayer/Settings/MarginContainer/VBoxContainer/SettingsButton" to="CanvasLayer/Settings" method="_on_settings_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Settings/MarginContainer/VBoxContainer/ResumeButton" to="CanvasLayer/Settings" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Settings/MarginContainer/VBoxContainer/QuitButton" to="CanvasLayer/Settings" method="_on_quit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Settings/MarginContainer/VBoxContainer/ExitButton" to="CanvasLayer/Settings" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SoloButton" to="." method="_on_solo_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/OnlineHost" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/LocalHost" to="." method="_on_local_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/ExitButton" to="CanvasLayer/PauseMenu" method="_on_exit_button_pressed"]
+[connection signal="exit" from="CanvasLayer/PauseMenu" to="." method="_on_peer_disconnected"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/SettingsButton" to="CanvasLayer/PauseMenu" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/ResumeButton" to="CanvasLayer/PauseMenu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/QuitButton" to="CanvasLayer/PauseMenu" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/ExitButton" to="CanvasLayer/PauseMenu" method="_on_exit_button_pressed"]

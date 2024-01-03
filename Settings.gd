@@ -8,11 +8,11 @@ var current_pause : bool = false:
 func set_paused(value):
 	current_pause = value
 	get_tree().paused = current_pause
-	%Settings.visible = current_pause
+	%PauseMenu.visible = current_pause
 
 # Settings Menu
 func _input(event: InputEvent):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") && %MapInstance.get_child_count() > 0:
 		current_pause = !current_pause
 
 func _on_settings_button_pressed():
@@ -23,14 +23,15 @@ func _on_resume_button_pressed():
 
 func _on_quit_button_pressed():
 	get_tree().paused = false
-	exit.emit(multiplayer.get_unique_id())
 	
-	if %MapInstance.get_child(0):
-		%MapInstance.get_child(0).queue_free()
-	for p in get_tree().get_nodes_in_group("Player"):
+	for p in %PlayerSpawn.get_children():
 		p.queue_free()
-	%Settings.hide()
-	%Menu.show()
+	for m in %MapInstance.get_children():
+		m.queue_free()
+	exit.emit(multiplayer.get_unique_id())	
+	
+	%PauseMenu.hide()
+	%MainMenu.show()
 
 func _on_exit_button_pressed():
 	get_tree().quit()

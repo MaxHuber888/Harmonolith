@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://clkvyt8p05qkf"]
 
-[ext_resource type="TileSet" uid="uid://c8mkwj0lrggbp" path="res://tiles/test_tiles.tres" id="1_rurgx"]
+[ext_resource type="TileSet" uid="uid://c8mkwj0lrggbp" path="res://scenes/tiles/test_tiles.tres" id="1_bwk45"]
 
-[node name="Test_Map" type="Node2D"]
+[node name="Test_Map" type="Node2D" groups=["Level"]]
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -16,7 +16,7 @@ polygon = PackedVector2Array(-73, 337, -361, 193, -361, -95, 23, -287, 311, -143
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
 scale = Vector2(4, 4)
-tile_set = ExtResource("1_rurgx")
+tile_set = ExtResource("1_bwk45")
 format = 2
 layer_0/name = "Layer 0"
 layer_0/y_sort_enabled = true
