@@ -127,12 +127,12 @@ func _on_solo_button_pressed():
 
 func _on_host_button_pressed():
 	create_game(true)
-	load_game.rpc(Lobby)
+	load_game.rpc("res://scenes/lobby.tscn")
 	add_player.rpc(multiplayer.get_unique_id())
 
 func _on_local_host_pressed():
 	create_game(false)
-	load_game.rpc(Lobby)
+	load_game.rpc("res://scenes/lobby.tscn")
 	add_player.rpc(multiplayer.get_unique_id())
 
 func _on_join_button_pressed():
