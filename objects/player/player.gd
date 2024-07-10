@@ -16,8 +16,6 @@ func _ready():
 	set_multiplayer_authority(name.to_int())
 	$DisplayAuthority.visible = is_multiplayer_authority()
 	
-	$Item/WeaponCollider.disabled = true
-	
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
 	camera.make_current()

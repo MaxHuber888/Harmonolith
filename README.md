@@ -2,4 +2,4 @@
 
 A simple Godot online multiplayer setup: connect to an online server, spawn players, and update their positions.
 
-*By: Thomas Chan*
+*By: Thomas Chan and Max Huber*

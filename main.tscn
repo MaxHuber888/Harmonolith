@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs7kdpemhirwt"]
+[gd_scene load_steps=7 format=3 uid="uid://cs7kdpemhirwt"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_qmj53"]
 [ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://objects/player/player.tscn" id="2_rnqeu"]
 [ext_resource type="Script" path="res://Settings.gd" id="3_2l8oy"]
 [ext_resource type="PackedScene" uid="uid://clvp4cain5340" path="res://scenes/lobby.tscn" id="3_rhoy3"]
 [ext_resource type="PackedScene" uid="uid://clkvyt8p05qkf" path="res://scenes/test_map.tscn" id="4_8a8k5"]
+[ext_resource type="Texture2D" uid="uid://d1jwgpxe1f4av" path="res://objects/sprites/gargantua-black-2880x1800-9659.jpg" id="5_00j62"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_qmj53")
@@ -29,6 +30,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MainMenu"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -50.0
+offset_right = 1923.0
+offset_bottom = 1148.0
+texture = ExtResource("5_00j62")
+expand_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
 layout_mode = 0
 offset_left = 285.0
@@ -44,33 +54,10 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Single Player:
-"
-horizontal_alignment = 1
-
-[node name="Label5" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "
-"
-
-[node name="SoloButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 30
-text = "Start Game"
-
-[node name="Label4" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "
-"
-
 [node name="Label2" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Multiplayer:"
+text = "Quantara"
 horizontal_alignment = 1
 
 [node name="Label6" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
@@ -81,12 +68,7 @@ text = "
 [node name="OnlineHost" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Online"
-
-[node name="LocalHost" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Local"
+text = "Create Game"
 
 [node name="Label3" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -214,9 +196,7 @@ theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 30
 text = "Exit Game"
 
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SoloButton" to="." method="_on_solo_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/OnlineHost" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/LocalHost" to="." method="_on_local_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/ExitButton" to="CanvasLayer/PauseMenu" method="_on_exit_button_pressed"]
