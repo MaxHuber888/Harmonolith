@@ -1,16 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs7kdpemhirwt"]
+[gd_scene load_steps=6 format=3 uid="uid://cs7kdpemhirwt"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_qmj53"]
 [ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://objects/player/player.tscn" id="2_rnqeu"]
 [ext_resource type="Script" path="res://Settings.gd" id="3_2l8oy"]
-[ext_resource type="PackedScene" uid="uid://clvp4cain5340" path="res://scenes/lobby.tscn" id="3_rhoy3"]
-[ext_resource type="PackedScene" uid="uid://clkvyt8p05qkf" path="res://scenes/test_map.tscn" id="4_8a8k5"]
+[ext_resource type="PackedScene" uid="uid://clvp4cain5340" path="res://scenes/lobby.tscn" id="4_8a8k5"]
 [ext_resource type="Texture2D" uid="uid://d1jwgpxe1f4av" path="res://objects/sprites/gargantua-black-2880x1800-9659.jpg" id="5_00j62"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_qmj53")
 Player = ExtResource("2_rnqeu")
-Lobby = ExtResource("3_rhoy3")
+Lobby = ExtResource("4_8a8k5")
 TestMap = ExtResource("4_8a8k5")
 
 [node name="MapInstance" type="Node2D" parent="."]
