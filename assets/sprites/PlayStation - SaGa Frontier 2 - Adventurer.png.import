@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c822ydi5mgbdm"
-path="res://.godot/imported/PlayStation - SaGa Frontier 2 - Adventurer.png-e7bad5b6097dd7bbe15c702d47b66ac6.ctex"
+path="res://.godot/imported/PlayStation - SaGa Frontier 2 - Adventurer.png-5f5ecd23dd48ad2ba2bdffdf69219d16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/sprites/PlayStation - SaGa Frontier 2 - Adventurer.png"
-dest_files=["res://.godot/imported/PlayStation - SaGa Frontier 2 - Adventurer.png-e7bad5b6097dd7bbe15c702d47b66ac6.ctex"]
+source_file="res://assets/sprites/PlayStation - SaGa Frontier 2 - Adventurer.png"
+dest_files=["res://.godot/imported/PlayStation - SaGa Frontier 2 - Adventurer.png-5f5ecd23dd48ad2ba2bdffdf69219d16.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdvakhv1wqb57"
-path="res://.godot/imported/Sword_Pixel_art_-_Radin.png-1d68a4f9721ac098fe552dcf3e4590bf.ctex"
+path="res://.godot/imported/Sword_Pixel_art_-_Radin.png-13884ce8f93ebce62a316b1ee8b9e9ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/sprites/Sword_Pixel_art_-_Radin.png"
-dest_files=["res://.godot/imported/Sword_Pixel_art_-_Radin.png-1d68a4f9721ac098fe552dcf3e4590bf.ctex"]
+source_file="res://assets/sprites/Sword_Pixel_art_-_Radin.png"
+dest_files=["res://.godot/imported/Sword_Pixel_art_-_Radin.png-13884ce8f93ebce62a316b1ee8b9e9ef.ctex"]
 
 [params]
 

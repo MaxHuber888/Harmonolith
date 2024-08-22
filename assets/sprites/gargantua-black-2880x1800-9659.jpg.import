@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmlnt0xx1tjji"
-path="res://.godot/imported/temp.png-b745f1b7ed1fb894e726b5e4f48f752c.ctex"
+uid="uid://d1jwgpxe1f4av"
+path="res://.godot/imported/gargantua-black-2880x1800-9659.jpg-896edf5ae4379ec780e51fed25895bfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/tiles/temp.png"
-dest_files=["res://.godot/imported/temp.png-b745f1b7ed1fb894e726b5e4f48f752c.ctex"]
+source_file="res://assets/sprites/gargantua-black-2880x1800-9659.jpg"
+dest_files=["res://.godot/imported/gargantua-black-2880x1800-9659.jpg-896edf5ae4379ec780e51fed25895bfa.ctex"]
 
 [params]
 

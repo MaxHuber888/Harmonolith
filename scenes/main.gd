@@ -30,7 +30,7 @@ func _ready():
 # Called on server and client
 func _on_peer_connected(id):
 	print("Player connected: " + str(id))
-	load_game.rpc("res://scenes/lobby.tscn")
+	load_game.rpc("res://scenes/levels/lobby.tscn")
 	add_player.rpc(id)
 
 # Called on server and client
@@ -123,7 +123,7 @@ func remove_player(id):
 # Game Methods
 func _on_host_button_pressed():
 	create_game(true)
-	load_game.rpc("res://scenes/lobby.tscn")
+	load_game.rpc("res://scenes/levels/lobby.tscn")
 	add_player.rpc(multiplayer.get_unique_id())
 
 func _on_join_button_pressed():

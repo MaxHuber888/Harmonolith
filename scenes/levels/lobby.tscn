@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://clvp4cain5340"]
 
-[ext_resource type="TileSet" uid="uid://exnpfiv0jnyp" path="res://scenes/tiles/temp_tiles.tres" id="1_barfm"]
-[ext_resource type="PackedScene" uid="uid://chin34cg06evi" path="res://objects/door/NextLevelDoor.tscn" id="2_k50i3"]
+[ext_resource type="TileSet" uid="uid://exnpfiv0jnyp" path="res://assets/tiles/temp_tiles.tres" id="1_barfm"]
+[ext_resource type="PackedScene" uid="uid://chin34cg06evi" path="res://scenes/objects/door/NextLevelDoor.tscn" id="2_k50i3"]
 
 [node name="Lobby" type="Node2D" groups=["Level"]]
 metadata/_edit_lock_ = true
@@ -33,5 +33,4 @@ scale = Vector2(1.52, 1.52)
 [node name="Players" type="Node2D" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://objects/player/player.tscn")
 spawn_path = NodePath("..")

@@ -15,6 +15,7 @@ var speed = Vector2(500, 300)
 func _ready():
 	set_multiplayer_authority(name.to_int())
 	$DisplayAuthority.visible = is_multiplayer_authority()
+	$"PlayerID Display".set_text("[center]%s[/center]" % name)
 	
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
