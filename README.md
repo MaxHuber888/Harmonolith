@@ -1,5 +1,5 @@
-# Godot Simple Networking
+# Quantara
 
-A simple Godot online multiplayer setup: connect to an online server, spawn players, and update their positions.
+An online co-op rogue-like RPG set in an alien world.
 
 *By: Thomas Chan and Max Huber*
