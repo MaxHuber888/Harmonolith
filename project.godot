@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Quantara"
+config/name="Harmonolith"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://Entities/player/icon.svg"
+config/icon="res://assets/sprites/harmonolith-logo.png"
 
 [display]
 
