@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b824cp5t48qoq"]
 
-[ext_resource type="Texture2D" path="res://scenes/tiles/xuEOJ_trans.png" id="1_nqw15"]
+[ext_resource type="Texture2D" uid="uid://bnxqedjbhior3" path="res://assets/sprites/test/brat-test.png" id="1_0du0n"]
 [ext_resource type="Script" path="res://scenes/objects/components/HealthComponent.gd" id="2_6kaeu"]
 [ext_resource type="Script" path="res://scenes/objects/components/HitboxComponent.gd" id="3_tpwcv"]
 
@@ -19,7 +19,7 @@ shape = SubResource("RectangleShape2D_bn6yl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)
-texture = ExtResource("1_nqw15")
+texture = ExtResource("1_0du0n")
 hframes = 16
 vframes = 20
 frame = 156

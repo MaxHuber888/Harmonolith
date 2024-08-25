@@ -12,21 +12,26 @@ var current_states = player_states.MOVE
 var input_movement = Vector2.ZERO
 var speed = Vector2(500, 300)
 
+var frozen = true
+var faction_id = -1
+
 func _ready():
 	set_multiplayer_authority(name.to_int())
-	$DisplayAuthority.visible = is_multiplayer_authority()
+	frozen = true
 	$"PlayerID Display".set_text("[center]%s[/center]" % name)
+	$DisplayAuthority.set_color(Color("#000000"))
 	
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
 	camera.make_current()
-	match current_states:
-		player_states.MOVE:
-			move()
-		player_states.ATTACK:
-			attack()
-		player_states.DODGE:
-			dodge()
+	if not frozen:
+		match current_states:
+			player_states.MOVE:
+				move()
+			player_states.ATTACK:
+				attack()
+			player_states.DODGE:
+				dodge()
 
 # movement
 func move():
@@ -63,6 +68,19 @@ func dodge():
 
 func _on_state_reset():
 	current_states = player_states.MOVE
+	
+func unfreeze():
+	if not frozen:
+		return
+	frozen = false
+	
+func set_faction(f_id):
+	faction_id = f_id
+	match faction_id:
+		0:
+			$DisplayAuthority.set_color(Color("#ffff00"))
+		1:
+			$DisplayAuthority.set_color(Color("#0000ff"))
 
 # handle mouse peek for camera movement
 #func _input(event: InputEvent):

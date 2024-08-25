@@ -44,8 +44,10 @@ func _on_peer_disconnected(id):
 	
 # Called on client only
 func _on_connected_to_server():
-	print("Connected to server.")
 	var peer_id = multiplayer.get_unique_id()
+	print("New player ", peer_id," connected to server.")
+	%MainMenu.hide()
+	%FactionSelectMenu.show()
 
 # Called on client only
 func _on_connection_failed():
@@ -97,7 +99,6 @@ func upnp_setup():
 # Game loading
 @rpc("call_local", "reliable")
 func load_game(scene):
-	%MainMenu.hide()
 	if %MapInstance.get_child(0):
 		%MapInstance.get_child(0).queue_free()
 	var map = load(scene).instantiate()
@@ -112,19 +113,39 @@ func add_player(id):
 	var pos := Vector2.from_angle(randf()*2*PI)
 	player_instance.position = Vector2(pos.x * RAND_SPAWN * randf(), pos.y * RAND_SPAWN * randf())
 
-
 @rpc("any_peer", "call_local", "reliable")
 func remove_player(id):
 	if not %PlayerSpawn.has_node(str(id)):
 		return
 	%PlayerSpawn.get_node(str(id)).queue_free()
 
+@rpc("any_peer", "call_local", "reliable")
+func unfreeze_player(id):
+	if not %PlayerSpawn.has_node(str(id)):
+		return
+	%PlayerSpawn.get_node(str(id)).unfreeze()
+
+@rpc("any_peer", "call_local", "reliable")
+func set_player_faction(player_id, faction_id):
+	if not %PlayerSpawn.has_node(str(player_id)):
+		return
+	%PlayerSpawn.get_node(str(player_id)).set_faction(faction_id)
 
 # Game Methods
 func _on_host_button_pressed():
 	create_game(true)
+	%MainMenu.hide()
+	%FactionSelectMenu.show()
 	load_game.rpc("res://scenes/levels/lobby.tscn")
 	add_player.rpc(multiplayer.get_unique_id())
+	
+func _on_faction_selected(faction_id):
+	%FactionSelectMenu.hide()
+	var faction_types = ["Sun Sage", "Valkaryan", "Untethered", "Quantum Swarm"]
+	# CHECK TO ENSURE VALID FACTION
+	print("Player ",multiplayer.get_unique_id()," selected Faction: ", faction_types[faction_id])
+	unfreeze_player(multiplayer.get_unique_id())
+	set_player_faction(multiplayer.get_unique_id(), faction_id)
 
 func _on_join_button_pressed():
 	join_game(%IPAddress.text)

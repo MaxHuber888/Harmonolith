@@ -1037,6 +1037,9 @@ properties/8/replication_mode = 1
 properties/9/path = NodePath("AnimTree:parameters/Dodge/blend_position")
 properties/9/spawn = true
 properties/9/replication_mode = 1
+properties/10/path = NodePath("DisplayAuthority:color")
+properties/10/spawn = true
+properties/10/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crf4s"]
 size = Vector2(51.5223, 68)
@@ -1063,7 +1066,7 @@ vframes = 8
 [node name="DisplayAuthority" type="Polygon2D" parent="."]
 position = Vector2(-4, -57)
 scale = Vector2(1, 0.966667)
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 1, 1)
 polygon = PackedVector2Array(-13, -123, 19, -123, 3, -93)
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df0ooqpnic0cc"
-path="res://.godot/imported/icon.svg-d57394acf6dfbac8bceb5e9cf1870002.ctex"
+uid="uid://dtp3i4vqr2j50"
+path="res://.godot/imported/valkaryan-test.png-f36bf3caf6954f88091bbe8b8cbdb172.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/objects/player/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-d57394acf6dfbac8bceb5e9cf1870002.ctex"]
+source_file="res://assets/sprites/test/valkaryan-test.png"
+dest_files=["res://.godot/imported/valkaryan-test.png-f36bf3caf6954f88091bbe8b8cbdb172.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
