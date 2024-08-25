@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cs7kdpemhirwt"]
+[gd_scene load_steps=14 format=3 uid="uid://cs7kdpemhirwt"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_qmj53"]
 [ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://scenes/objects/player/player.tscn" id="2_rnqeu"]
@@ -7,11 +7,25 @@
 [ext_resource type="Texture2D" uid="uid://d1jwgpxe1f4av" path="res://assets/sprites/gargantua-black-2880x1800-9659.jpg" id="5_00j62"]
 [ext_resource type="Texture2D" uid="uid://cx1qjk4ln0xff" path="res://assets/sprites/harmonolith-logo.png" id="5_qqfps"]
 [ext_resource type="FontFile" uid="uid://c8yr17aja0yyi" path="res://assets/fonts/BigBlueTermPlusNerdFontMono-Regular.ttf" id="6_k71oe"]
-[ext_resource type="Script" path="res://scenes/menu/FactionSelect.gd" id="8_8o16v"]
 [ext_resource type="Texture2D" uid="uid://ddegk47ga8sr6" path="res://assets/sprites/test/sunsage-test.png" id="9_0l3ol"]
-[ext_resource type="Texture2D" uid="uid://dblrwnq6w88ek" path="res://assets/sprites/test/nyah-test.png" id="10_u5h4x"]
 [ext_resource type="Texture2D" uid="uid://dhb68iwrked01" path="res://assets/sprites/test/pressed-test.png" id="10_wvym4"]
 [ext_resource type="Texture2D" uid="uid://dtp3i4vqr2j50" path="res://assets/sprites/test/valkaryan-test.png" id="11_wipfw"]
+[ext_resource type="Texture2D" uid="uid://bt2hhe5mipkfu" path="res://assets/sprites/test/untethered-test.png" id="13_or7ac"]
+[ext_resource type="Texture2D" uid="uid://6ihw0co7pssx" path="res://assets/sprites/test/swarm-test.png" id="14_8we1r"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tu3f3"]
+properties/0/path = NodePath("MarginContainer/VBoxContainer/Faction Buttons/SunSage Button:disabled")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("MarginContainer/VBoxContainer/Faction Buttons/Valkaryan Button:disabled")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("MarginContainer/VBoxContainer/Faction Buttons/Untethered Button:disabled")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("MarginContainer/VBoxContainer/Faction Buttons/Swarm Button:disabled")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [node name="Main" type="Node"]
 script = ExtResource("1_qmj53")
@@ -227,15 +241,15 @@ process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("8_8o16v")
 metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/FactionSelectMenu"]
 layout_mode = 0
-offset_left = 285.0
-offset_top = 199.5
-offset_right = 1635.0
-offset_bottom = 880.5
+offset_left = 104.0
+offset_top = 8.0
+offset_right = 1816.0
+offset_bottom = 689.0
+scale = Vector2(1, 1.52)
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 50
@@ -245,26 +259,46 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 alignment = 1
 
-[node name="Player Count" type="Label" parent="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "0"
+theme_override_fonts/font = ExtResource("6_k71oe")
+theme_override_font_sizes/font_size = 45
+text = "Choose a Faction:"
 horizontal_alignment = 1
 
 [node name="Faction Buttons" type="HBoxContainer" parent="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="SunSage Button" type="TextureButton" parent="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer/Faction Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("9_0l3ol")
 texture_pressed = ExtResource("10_wvym4")
-texture_disabled = ExtResource("10_u5h4x")
+texture_disabled = ExtResource("10_wvym4")
 
 [node name="Valkaryan Button" type="TextureButton" parent="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer/Faction Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("11_wipfw")
 texture_pressed = ExtResource("10_wvym4")
-texture_disabled = ExtResource("10_u5h4x")
+texture_disabled = ExtResource("10_wvym4")
+
+[node name="Untethered Button" type="TextureButton" parent="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer/Faction Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("13_or7ac")
+texture_pressed = ExtResource("10_wvym4")
+texture_disabled = ExtResource("10_wvym4")
+
+[node name="Swarm Button" type="TextureButton" parent="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer/Faction Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("14_8we1r")
+texture_pressed = ExtResource("10_wvym4")
+texture_disabled = ExtResource("10_wvym4")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CanvasLayer/FactionSelectMenu"]
+replication_config = SubResource("SceneReplicationConfig_tu3f3")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/OnlineHost" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
@@ -277,3 +311,5 @@ texture_disabled = ExtResource("10_u5h4x")
 [connection signal="pressed" from="CanvasLayer/PauseMenu/MarginContainer/VBoxContainer/ExitButton" to="CanvasLayer/PauseMenu" method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer/Faction Buttons/SunSage Button" to="." method="_on_faction_selected" binds= [0]]
 [connection signal="pressed" from="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer/Faction Buttons/Valkaryan Button" to="." method="_on_faction_selected" binds= [1]]
+[connection signal="pressed" from="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer/Faction Buttons/Untethered Button" to="." method="_on_faction_selected" binds= [2]]
+[connection signal="pressed" from="CanvasLayer/FactionSelectMenu/MarginContainer/VBoxContainer/Faction Buttons/Swarm Button" to="." method="_on_faction_selected" binds= [3]]

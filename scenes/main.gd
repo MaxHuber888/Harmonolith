@@ -142,6 +142,16 @@ func _on_host_button_pressed():
 func _on_faction_selected(faction_id):
 	%FactionSelectMenu.hide()
 	var faction_types = ["Sun Sage", "Valkaryan", "Untethered", "Quantum Swarm"]
+	# DISABLE SELECTED FACTION BUTTON
+	match faction_id:
+		0:
+			%"SunSage Button".disabled = true
+		1:
+			%"Valkaryan Button".disabled = true
+		2: 
+			%"Untethered Button".disabled = true
+		3:
+			%"Swarm Button".disabled = true
 	# CHECK TO ENSURE VALID FACTION
 	print("Player ",multiplayer.get_unique_id()," selected Faction: ", faction_types[faction_id])
 	unfreeze_player(multiplayer.get_unique_id())

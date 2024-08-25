@@ -78,9 +78,13 @@ func set_faction(f_id):
 	faction_id = f_id
 	match faction_id:
 		0:
-			$DisplayAuthority.set_color(Color("#ffff00"))
+			$DisplayAuthority.set_color(Color("#ffca21"))
 		1:
-			$DisplayAuthority.set_color(Color("#0000ff"))
+			$DisplayAuthority.set_color(Color("#0097ff"))
+		2:
+			$DisplayAuthority.set_color(Color("#50f14a"))
+		3:
+			$DisplayAuthority.set_color(Color("#ff0056"))
 
 # handle mouse peek for camera movement
 #func _input(event: InputEvent):
