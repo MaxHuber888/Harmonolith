@@ -30,8 +30,8 @@ func _ready():
 # Called on server and client
 func _on_peer_connected(id):
 	print("Player connected: " + str(id))
-	load_game.rpc("res://scenes/levels/lobby.tscn")
 	add_player.rpc(id)
+	
 
 # Called on server and client
 func _on_peer_disconnected(id):
@@ -44,10 +44,16 @@ func _on_peer_disconnected(id):
 	
 # Called on client only
 func _on_connected_to_server():
+	LoadManager.load_process("Joining server...")
+	await Signal(LoadManager, "loading_screen_has_full_coverage")
 	var peer_id = multiplayer.get_unique_id()
 	print("New player ", peer_id," connected to server.")
 	%MainMenu.hide()
 	%FactionSelectMenu.show()
+	load_game.rpc("res://scenes/levels/lobby.tscn")
+	LoadManager.finish_process()
+	
+	
 
 # Called on client only
 func _on_connection_failed():
@@ -74,6 +80,7 @@ func create_game(is_online):
 		return error
 	
 	multiplayer.multiplayer_peer = peer
+	emit_signal("game_created")
 
 # Client - Call this in the `ready()` function and set the public IP address of your server for automatic joining
 func join_game(address_to_join):
@@ -133,11 +140,14 @@ func set_player_faction(player_id, faction_id):
 
 # Game Methods
 func _on_host_button_pressed():
+	LoadManager.load_process("Creating server...")
+	await Signal(LoadManager, "loading_screen_has_full_coverage")
 	create_game(true)
 	%MainMenu.hide()
 	%FactionSelectMenu.show()
 	load_game.rpc("res://scenes/levels/lobby.tscn")
 	add_player.rpc(multiplayer.get_unique_id())
+	LoadManager.finish_process()
 	
 func _on_faction_selected(faction_id):
 	%FactionSelectMenu.hide()

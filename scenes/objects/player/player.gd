@@ -23,8 +23,8 @@ func _ready():
 	
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
-	camera.make_current()
 	if not frozen:
+		camera.make_current()
 		match current_states:
 			player_states.MOVE:
 				move()
@@ -73,6 +73,7 @@ func unfreeze():
 	if not frozen:
 		return
 	frozen = false
+	$Camera2D.enabled = true
 	
 func set_faction(f_id):
 	faction_id = f_id

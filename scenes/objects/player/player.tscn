@@ -1089,6 +1089,8 @@ parameters/Idle/blend_position = Vector2(-0.00341296, 0.0446194)
 parameters/Walk/blend_position = Vector2(-0.00731349, 0.0131233)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+enabled = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_eswml")

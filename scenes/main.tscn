@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cs7kdpemhirwt"]
+[gd_scene load_steps=15 format=3 uid="uid://cs7kdpemhirwt"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_qmj53"]
 [ext_resource type="PackedScene" uid="uid://dsm0u4o7lg7sr" path="res://scenes/objects/player/player.tscn" id="2_rnqeu"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://dtp3i4vqr2j50" path="res://assets/sprites/test/valkaryan-test.png" id="11_wipfw"]
 [ext_resource type="Texture2D" uid="uid://bt2hhe5mipkfu" path="res://assets/sprites/test/untethered-test.png" id="13_or7ac"]
 [ext_resource type="Texture2D" uid="uid://6ihw0co7pssx" path="res://assets/sprites/test/swarm-test.png" id="14_8we1r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slj4n"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tu3f3"]
 properties/0/path = NodePath("MarginContainer/VBoxContainer/Faction Buttons/SunSage Button:disabled")
@@ -41,6 +44,7 @@ unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 2
+follow_viewport_enabled = true
 
 [node name="MainMenu" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -242,6 +246,14 @@ visible = false
 layout_mode = 3
 anchors_preset = 0
 metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="CanvasLayer/FactionSelectMenu"]
+layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slj4n")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/FactionSelectMenu"]
 layout_mode = 0
