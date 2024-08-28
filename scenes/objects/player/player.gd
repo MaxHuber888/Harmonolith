@@ -6,7 +6,12 @@ const cam_mouse_influence = 0.3
 
 @onready var anim_tree = $AnimTree
 @onready var anim_state = anim_tree.get("parameters/playback")
-enum player_states {MOVE, ATTACK, DODGE, DEAD}
+enum player_states {
+	MOVE, 
+	ATTACK, 
+	DODGE, 
+	DEAD
+}
 var current_states = player_states.MOVE
 
 var input_movement = Vector2.ZERO
@@ -21,7 +26,7 @@ func _ready():
 	$"PlayerID Display".set_text("[center]%s[/center]" % name)
 	$DisplayAuthority.set_color(Color("#000000"))
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_multiplayer_authority(): return
 	if not frozen:
 		camera.make_current()

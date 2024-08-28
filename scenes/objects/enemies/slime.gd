@@ -1,61 +1,72 @@
+class_name Enemy
 extends CharacterBody2D
-
-var speed = 300
-var closestPlayer
 
 signal hit_player
 
+@onready var anim_tree = $AnimationTree
+@onready var anim_state = anim_tree.get("parameters/playback")
 enum {
-	SWARM,
+	IDLE,
+	MOVE,
 	ATTACK,
 	HURT,
 }
+var state = IDLE
 
-var state = SWARM
+var speed = 300
+var sight_range = 350
+var attack_range = 60
+var target
 
 func _ready():
-	
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var randomnum = rng.randf()
+	$Sight/CollisionShape2D.shape.radius = sight_range
+	$AttackRange/CollisionShape2D.shape.radius = attack_range
 
 func _physics_process(delta):
-	closestPlayer = find_closest_player()
 	match state:
-		SWARM:
-			move(closestPlayer, delta)
+		IDLE:
+			idle()
+		MOVE:
+			move(target, delta)
 		ATTACK:
 			attack()
 		HURT:
 			hurt()
 
+func idle():
+	anim_state.travel("idle")
+	pass
+
 func move(target, delta):
 	var direction = (target.position - global_position).normalized()
+	if direction.x < 0:
+		$Sprite2D.flip_h = true
 	var desired_velocity = direction * speed
 	var steering = (desired_velocity - velocity) * delta * 2.5
 	velocity += steering
-	$AnimatedSprite2D.play("walk")
+	anim_state.travel("walk")
 	move_and_slide()
 
 func attack():
-	$AnimatedSprite2D.play("attack")
-	hit_player.emit()
+	anim_state.travel("attack")
 	
 func hurt():
-	pass
+	anim_state.travel("hurt")
 
-func find_closest_player():
-	var closestDistance = 100000000
-	var closestPlayer = Object
-	
-	var all_players = get_tree().get_nodes_in_group("Player")
-	for player in all_players:
-		var enemy2player_distance = position.distance_to(player.position)
-		if enemy2player_distance < closestDistance:
-			closestDistance = enemy2player_distance
-			closestPlayer = player
-	return closestPlayer
+func _on_sight_body_entered(body):
+	target = body
+	state = MOVE
 
-func _on_hitbox_body_entered(body):
+func _on_sight_body_exited(body):
+	state = IDLE
+
+func _on_attack_range_body_entered(body):
 	state = ATTACK
-	print("hit player " + body.name)
+
+func _on_attack_range_body_exited(body):
+	state = MOVE
+
+func _on_hurtbox_body_entered(body):
+	if body.is_in_group("Player"):
+		print("hit player " + body.name)
+		hit_player.emit()

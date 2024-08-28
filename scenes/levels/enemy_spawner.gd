@@ -1,6 +1,6 @@
 extends Node2D
 
-var enemy_scene := preload("res://scenes/objects/enemies/slime.tscn")
+var enemy_scene := preload("res://scenes/objects/enemies/brat.tscn")
 var spawn_points := []
 var spawn_time = 5
 var max_enemies = 10
@@ -15,7 +15,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
