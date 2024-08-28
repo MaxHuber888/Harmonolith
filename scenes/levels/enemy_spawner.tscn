@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqirv6mi3wgdj"]
+
+[ext_resource type="Script" path="res://scenes/levels/enemy_spawner.gd" id="1_cu7en"]
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_cu7en")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/objects/enemies/slime.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

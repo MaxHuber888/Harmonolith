@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://uhnpt2gw83x5"]
+
+[ext_resource type="Texture2D" uid="uid://bnxqedjbhior3" path="res://assets/sprites/test/brat-test.png" id="1_674so"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijaq5"]
+size = Vector2(100, 99)
+
+[node name="Brat" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 13
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_674so")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ijaq5")

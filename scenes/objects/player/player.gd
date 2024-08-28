@@ -10,7 +10,7 @@ enum player_states {MOVE, ATTACK, DODGE, DEAD}
 var current_states = player_states.MOVE
 
 var input_movement = Vector2.ZERO
-var speed = Vector2(500, 300)
+var speed = Vector2(500, 500)
 
 var frozen = true
 var faction_id = -1
@@ -75,6 +75,16 @@ func unfreeze():
 	frozen = false
 	$Camera2D.enabled = true
 	
+# handle mouse peek for camera movement
+#func _input(event: InputEvent):
+	#if event is InputEventMouseMotion:
+		#var target = event.position - get_viewport().size * cam_mouse_influence
+		#if target.length() < cam_deadzone:
+			#camera.position = Vector2(0,0)
+		#else:
+			#camera.position = target.normalized() * (target.length() - cam_deadzone) * cam_mouse_influence
+	
+	
 func set_faction(f_id):
 	faction_id = f_id
 	match faction_id:
@@ -87,12 +97,3 @@ func set_faction(f_id):
 		3:
 			$DisplayAuthority.set_color(Color("#ff0056"))
 
-# handle mouse peek for camera movement
-#func _input(event: InputEvent):
-	#if event is InputEventMouseMotion:
-		#var target = event.position - get_viewport().size * cam_mouse_influence
-		#if target.length() < cam_deadzone:
-			#camera.position = Vector2(0,0)
-		#else:
-			#camera.position = target.normalized() * (target.length() - cam_deadzone) * cam_mouse_influence
-	

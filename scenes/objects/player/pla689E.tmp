@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dsm0u4o7lg7sr"]
+[gd_scene load_steps=57 format=3 uid="uid://dsm0u4o7lg7sr"]
 
 [ext_resource type="Script" path="res://scenes/objects/player/player.gd" id="1_8vnfr"]
 [ext_resource type="Texture2D" uid="uid://c822ydi5mgbdm" path="res://assets/sprites/PlayStation - SaGa Frontier 2 - Adventurer.png" id="2_fdosq"]
@@ -713,10 +713,10 @@ properties/2/path = NodePath("AnimTree:anim_player")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 properties/3/path = NodePath("BodySprite:frame")
-properties/3/spawn = true
+properties/3/spawn = false
 properties/3/replication_mode = 1
 properties/4/path = NodePath("BodySprite:flip_h")
-properties/4/spawn = true
+properties/4/spawn = false
 properties/4/replication_mode = 1
 properties/5/path = NodePath("AnimPlayer:current_animation")
 properties/5/spawn = true
@@ -737,12 +737,9 @@ properties/10/path = NodePath("DisplayAuthority:color")
 properties/10/spawn = true
 properties/10/replication_mode = 1
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3hjw6"]
-radius = 150.0
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
-collision_mask = 11
+collision_mask = 13
 script = ExtResource("1_8vnfr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -756,7 +753,7 @@ texture = ExtResource("2_fdosq")
 hframes = 10
 vframes = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(1, -11)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5c1t5")
@@ -800,14 +797,3 @@ theme_override_font_sizes/normal_font_size = 38
 bbcode_enabled = true
 text = "[center]1[/center]"
 fit_content = true
-
-[node name="Attack" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
-position = Vector2(-6, -61)
-shape = SubResource("CircleShape2D_3hjw6")
-
-[connection signal="area_entered" from="Attack" to="." method="_on_attack_area_entered"]
-[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
