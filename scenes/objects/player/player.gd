@@ -16,6 +16,9 @@ var current_states = player_states.MOVE
 
 var input_movement = Vector2.ZERO
 var speed = Vector2(500, 500)
+var dodge_coeff = 2
+
+var health = 100
 
 var frozen = true
 var faction_id = -1
@@ -43,9 +46,6 @@ func move():
 	input_movement = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	if input_movement != Vector2.ZERO:
-		anim_tree.set("parameters/Idle/blend_position", input_movement)
-		anim_tree.set("parameters/Walk/blend_position", input_movement)
-		anim_tree.set("parameters/Dodge/blend_position", input_movement)
 		anim_state.travel("Walk")
 		
 		velocity = input_movement * speed
@@ -64,16 +64,26 @@ func move():
 # attacking
 func attack():
 	anim_state.travel("Attack")
+	current_states = player_states.MOVE
 
 # dodge roll
 func dodge():
 	anim_state.travel("Dodge")
-	velocity = input_movement * speed
+	velocity = input_movement * speed * dodge_coeff
+	current_states = player_states.MOVE
 	move_and_slide()
 
-func _on_state_reset():
-	current_states = player_states.MOVE
-	
+func _on_hitbox_body_entered(body):
+	health -= 25
+	print("yowch")
+	pass # Replace with function body.
+
+
+func _on_hurtbox_body_entered(body):
+	print("Hit enemy " + body.name)
+	pass # Replace with function body.
+
+
 func unfreeze():
 	if not frozen:
 		return
@@ -89,7 +99,7 @@ func unfreeze():
 		#else:
 			#camera.position = target.normalized() * (target.length() - cam_deadzone) * cam_mouse_influence
 	
-	
+
 func set_faction(f_id):
 	faction_id = f_id
 	match faction_id:
@@ -101,4 +111,3 @@ func set_faction(f_id):
 			$DisplayAuthority.set_color(Color("#50f14a"))
 		3:
 			$DisplayAuthority.set_color(Color("#ff0056"))
-

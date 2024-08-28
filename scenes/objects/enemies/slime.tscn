@@ -1,7 +1,7 @@
 [gd_scene load_steps=62 format=3 uid="uid://byvubofdtj2hc"]
 
 [ext_resource type="Texture2D" uid="uid://btn5wid31th3i" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_attack.png" id="1_ai4nd"]
-[ext_resource type="Script" path="res://scenes/objects/enemies/slime.gd" id="1_bktrm"]
+[ext_resource type="Script" path="res://scenes/objects/enemies/enemy.gd" id="1_vobx4"]
 [ext_resource type="Texture2D" uid="uid://hglwmnda34jm" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_death.png" id="2_6ydpi"]
 [ext_resource type="Texture2D" uid="uid://c3mjiahssq6u1" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_hurt.png" id="3_57ue7"]
 [ext_resource type="Texture2D" uid="uid://doq4k5jmg7rie" path="res://assets/sprites/Pixelarium - Enemy Pack1 - Free Version/Slime/Blue Slime/spr_Blue_slime_idle.png" id="4_nefw0"]
@@ -411,7 +411,7 @@ graph_offset = Vector2(-44, -12)
 scale = Vector2(5, 5)
 collision_layer = 4
 collision_mask = 13
-script = ExtResource("1_bktrm")
+script = ExtResource("1_vobx4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 1)
