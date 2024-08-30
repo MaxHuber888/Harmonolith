@@ -41,6 +41,7 @@ func _physics_process(_delta):
 				attack()
 			player_states.DODGE:
 				dodge()
+		update_hurtbox_position()
 
 # movement
 func move():
@@ -109,6 +110,21 @@ func unfreeze():
 		#else:
 			#camera.position = target.normalized() * (target.length() - cam_deadzone) * cam_mouse_influence
 	
+func update_hurtbox_position():
+	var mouse_position = get_global_mouse_position()
+	var player_position = global_position
+	var direction_vector = mouse_position - player_position
+
+	if abs(direction_vector.x) > abs(direction_vector.y):
+		if direction_vector.x > 0:
+			$Hurtbox.set_rotation_degrees(0)  # Move hurtbox to the right of the player
+		else:
+			$Hurtbox.set_rotation_degrees(180) # Move hurtbox to the left of the player
+	else:
+		if direction_vector.y < 0:
+			$Hurtbox.set_rotation_degrees(270)  # Move hurtbox below the player
+		else:
+			$Hurtbox.set_rotation_degrees(90)  # Move hurtbox above the player
 
 func set_faction(f_id):
 	faction_id = f_id

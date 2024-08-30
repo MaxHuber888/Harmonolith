@@ -663,7 +663,6 @@ position = Vector2(-0.999998, -63)
 shape = SubResource("CapsuleShape2D_ml1cn")
 
 [node name="Hitbox" type="Area2D" parent="."]
-position = Vector2(1.90735e-06, -1.52588e-05)
 collision_layer = 2
 collision_mask = 12
 
@@ -672,13 +671,12 @@ position = Vector2(-1, -63)
 shape = SubResource("CapsuleShape2D_vm18g")
 
 [node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2(1.90735e-06, -1.52588e-05)
+position = Vector2(0, -63)
 collision_layer = 8
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(134, -77)
-rotation = -0.837402
+position = Vector2(128, -1)
 shape = SubResource("CapsuleShape2D_8fxeg")
 disabled = true
 debug_color = Color(0.784314, 0.392157, 0.294118, 0.419608)
