@@ -22,6 +22,7 @@ var health = 100
 
 var frozen = true
 var faction_id = -1
+var direction = "right"
 
 func _ready():
 	set_multiplayer_authority(name.to_int())
@@ -48,7 +49,16 @@ func move():
 	if input_movement != Vector2.ZERO:
 		anim_state.travel("Walk")
 		
+		# Flip sprite based on movement direction
+		if input_movement.x < 0 and direction == "right":
+			$BodySprite.flip_h = true  # Flip horizontally
+			direction = "left"
+		elif input_movement.x > 0 and direction == "left":
+			$BodySprite.flip_h = false  # Reset to original orientation
+			direction = "right"
+		
 		velocity = input_movement * speed
+		
 	if input_movement == Vector2.ZERO:
 		anim_state.travel("Idle")
 		velocity = Vector2.ZERO

@@ -44,6 +44,17 @@ func idle():
 
 func move(target, delta):
 	var direction = (target.position - global_position).normalized()
+	# Flip sprite based on movement direction
+	if direction.x < 0:
+		$Sprite2D.flip_h = true  # Flip horizontally
+		$Hitbox.scale.x = -1
+		$Hurtbox.scale.x = -1
+		$AttackRange.scale.x = -1
+	elif direction.x > 0:
+		$Sprite2D.flip_h = false  # Reset to original orientation
+		$Hitbox.scale.x = 1
+		$Hurtbox.scale.x = 1
+		$AttackRange.scale.x = 1
 	var desired_velocity = direction * speed
 	var steering = (desired_velocity - velocity) * delta * steering_coeff
 	velocity += steering
