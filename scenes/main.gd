@@ -52,8 +52,6 @@ func _on_connected_to_server():
 	%FactionSelectMenu.show()
 	load_game.rpc("res://scenes/levels/lobby.tscn")
 	LoadManager.finish_process()
-	
-	
 
 # Called on client only
 func _on_connection_failed():

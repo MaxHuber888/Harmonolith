@@ -9,6 +9,7 @@ func set_paused(value):
 	current_pause = value
 	get_tree().paused = current_pause
 	%PauseMenu.visible = current_pause
+	%PauseMenu
 
 # Settings Menu
 func _input(event: InputEvent):
